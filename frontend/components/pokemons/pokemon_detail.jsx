@@ -17,15 +17,15 @@ var PokemonDetail = React.createClass({
     var pokemon = this.state.pokemon;
     var detailView;
 
-    if (this.state.pokemon) {
+    if (pokemon) {
       detailView = (
         <div className="pokemon-detail-pane">
           <div className="detail">
             {pokemon.name}<br/>
-            {pokemon.attack}<br/>
-            {pokemon.defense}<br/>
-            {pokemon.poke_type}<br/>
-            {pokemon.moves}<br/>
+            Attack: {pokemon.attack}<br/>
+            Defense: {pokemon.defense}<br/>
+            Type: {pokemon.poke_type}<br/>
+            Moves: {pokemon.moves.join(", ")}<br/>
             <img src={pokemon.image_url} />
           </div>
         </div>
