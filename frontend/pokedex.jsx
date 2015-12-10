@@ -1,6 +1,7 @@
 var React = require('react'),
-    ReactDOM = require('react-dom');
+    ReactDOM = require('react-dom'),
+    PokemonsIndex = require('./components/pokemons/pokemons_index');
 
 document.addEventListener("DOMContentLoaded", function () {
-  ReactDOM.render(<div>Pokedex</div>, document.getElementById("root"));
+  ReactDOM.render(<PokemonsIndex/>, document.getElementById("root"));
 });
