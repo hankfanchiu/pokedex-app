@@ -1,4 +1,5 @@
 var React = require('react'),
+    ApiUtil = require('../../util/api_util'),
     PokemonStore = require('../../stores/pokemon');
 
 var PokemonDetail = React.createClass({
@@ -11,6 +12,22 @@ var PokemonDetail = React.createClass({
   getStateFromStore: function () {
     var id = parseInt(this.props.params.pokemonId);
     return PokemonStore.find(id);
+  },
+
+  componentDidMount: function () {
+    this.listenerToken = PokemonStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+
+  componentWillReceiveProps: function (newProps) {
+    ApiUtil.fetchPokemon(newProps.params.pokemonId);
+  },
+
+  _onChange: function () {
+    this.setState({ pokemon: this.getStateFromStore() });
   },
 
   render: function () {
