@@ -17,3 +17,6 @@ bundle.js.map
 /log/*
 !/log/.keep
 /tmp
+
+#node_modules
+node_modules
