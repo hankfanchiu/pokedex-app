@@ -22,6 +22,10 @@ PokemonStore.all = function () {
   return copiedPokemons;
 };
 
+PokemonStore.find = function (id) {
+  return _pokemons[id];
+};
+
 var resetPokemons = function (pokemons) {
   _pokemons = {};
   pokemons.forEach(function(pokemon) {

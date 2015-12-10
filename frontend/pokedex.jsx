@@ -3,11 +3,14 @@ var React = require('react'),
     Router = require('react-router').Router,
     Route = require('react-router').Route,
     App = require('./components/app'),
+    PokemonDetail = require('./components/pokemons/pokemon_detail'),
     PokemonsIndex = require('./components/pokemons/pokemons_index');
 
 var router = (
   <Router>
-    <Route path="/" component={App} />
+    <Route path="/" component={App}>
+      <Route path="pokemon/:pokemonId" component={PokemonDetail}></Route>
+    </Route>
   </Router>
 );
 

@@ -8,6 +8,7 @@ var App = React.createClass({
         <div className="pokemon-index-pane">
           <PokemonsIndex />
         </div>
+        {this.props.children}
       </div>
     );
   }
