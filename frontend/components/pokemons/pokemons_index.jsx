@@ -5,9 +5,7 @@ var React = require('react'),
 
 var PokemonsIndex = React.createClass({
   getInitialState: function () {
-    return {
-      pokemons: PokemonStore.all()
-    };
+    return { pokemons: PokemonStore.all() };
   },
 
   componentDidMount: function () {
@@ -33,11 +31,7 @@ var PokemonsIndex = React.createClass({
     }.bind(this));
 
     return (
-      <div>
-        <ul>
-          {pokemons}
-        </ul>
-      </div>
+      <ul>{pokemons}</ul>
     );
   }
 });

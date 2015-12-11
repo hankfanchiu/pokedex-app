@@ -1,12 +1,11 @@
 var React = require('react'),
     ApiUtil = require('../../util/api_util'),
+    ToysIndex = require('../toys/toys_index'),
     PokemonStore = require('../../stores/pokemon');
 
 var PokemonDetail = React.createClass({
   getInitialState: function () {
-    return {
-      pokemon: this.getStateFromStore()
-    };
+    return { pokemon: this.getStateFromStore() };
   },
 
   getStateFromStore: function () {
@@ -33,6 +32,8 @@ var PokemonDetail = React.createClass({
   render: function () {
     var pokemon = this.state.pokemon;
     var detailView;
+    var toyIndex = <ToysIndex toys={pokemon.toys}/>;
+    var toyDetail = this.props.children;
 
     if (pokemon) {
       detailView = (
@@ -45,6 +46,7 @@ var PokemonDetail = React.createClass({
             Moves: {pokemon.moves.join(", ")}<br/>
             <img src={pokemon.image_url} />
           </div>
+          {pokemon.toys ? toyIndex : ""}
         </div>
       );
     } else {
@@ -54,6 +56,7 @@ var PokemonDetail = React.createClass({
     return (
       <div>
         {detailView}
+        {pokemon.toys ? toyDetail : ""}
       </div>
     );
   }
