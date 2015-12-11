@@ -28,7 +28,7 @@ var PokemonsIndex = React.createClass({
     });
 
     return (
-      <ul>{pokemons}</ul>
+      <ul>{pokemonIndexItems}</ul>
     );
   }
 });

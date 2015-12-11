@@ -13,15 +13,9 @@ var ToyIndexItem = React.createClass({
   },
 
   render: function () {
-    var toy = this.props.toy;
-
     return (
       <li className="toy-list-item" onClick={this.toyDetail}>
-        {toy.name}
-
-        Happiness: {toy.happiness}
-
-        Price: ${toy.price}
+        {this.props.toy.name}
       </li>
     );
   }

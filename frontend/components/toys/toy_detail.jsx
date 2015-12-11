@@ -13,9 +13,14 @@ var ToyDetail = React.createClass({
 
     var toys = PokemonStore.find(pokemonId).toys;
 
-    return toys.find(function (possibleToy) {
-      possibleToy.id === toyId;
+    var toy;
+    toys.forEach(function (possibleToy) {
+      if (possibleToy.id === toyId) {
+        toy = possibleToy;
+      }
     });
+
+    return toy;
   },
 
   _onChange: function () {
