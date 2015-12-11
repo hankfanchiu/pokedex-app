@@ -32,7 +32,7 @@ var PokemonForm = React.createClass({
     this.history.push("/pokemon/" + id);
   },
 
-  handleSubmit: function (e) {
+  handleCreate: function (e) {
     e.preventDefault();
 
     var newPokemon = {
@@ -58,7 +58,7 @@ var PokemonForm = React.createClass({
 
   render: function () {
     return (
-      <form className="new-pokemon" onSubmit={this.handleSubmit}>
+      <form className="new-pokemon">
 
         <input type="text"
                valueLink={this.linkState("name")}
@@ -85,7 +85,9 @@ var PokemonForm = React.createClass({
                valueLink={this.linkState("image_url")}
                placeholder="Pokemon picture URL"/>
 
-        <input type="submit" value="Create Pokemon!"/>
+        <button onClick={this.handleCreate>
+          "Create Pokemon!"
+        </button>
       </form>
     );
   }
