@@ -85,7 +85,7 @@ var PokemonForm = React.createClass({
                valueLink={this.linkState("image_url")}
                placeholder="Pokemon picture URL"/>
 
-        <button onClick={this.handleCreate>
+        <button onClick={this.handleCreate}>
           "Create Pokemon!"
         </button>
       </form>
