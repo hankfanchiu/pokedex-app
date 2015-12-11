@@ -5,16 +5,13 @@ var PokemonIndexItem = React.createClass({
   mixins: [History],
 
   showDetail: function () {
-    var url = "pokemon/" + this.props.pokemon.id;
-    this.history.push(url);
+    this.history.push("pokemon/" + this.props.pokemon.id);
   },
 
   render: function () {
-    var pokemon = this.props.pokemon;
-
     return (
       <li className='poke-list-item' onClick={this.showDetail}>
-        {pokemon.id}) {pokemon.name}
+        ({this.props.pokemon.id}) {this.props.pokemon.name}
       </li>
     );
   }

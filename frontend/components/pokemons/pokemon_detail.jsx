@@ -29,34 +29,39 @@ var PokemonDetail = React.createClass({
     this.setState({ pokemon: this.getStateFromStore() });
   },
 
+  showDetail: function () {
+    var pokemon = this.state.pokemon;
+
+    return (
+      <div className="pokemon-detail-pane">
+
+        <div className="detail">
+          {pokemon.name}<br/>
+
+          Attack: {pokemon.attack}<br/>
+
+          Defense: {pokemon.defense}<br/>
+
+          Type: {pokemon.poke_type}<br/>
+
+          Moves: {pokemon.moves.join(", ")}<br/>
+
+          <img src={pokemon.image_url} />
+        </div>
+
+        {pokemon.toys ? <ToysIndex toys={pokemon.toys}/> : ""}
+
+      </div>
+    );
+  },
+
   render: function () {
     var pokemon = this.state.pokemon;
-    var detailView;
-    var toyIndex = <ToysIndex toys={pokemon.toys}/>;
-    var toyDetail = this.props.children;
-
-    if (pokemon) {
-      detailView = (
-        <div className="pokemon-detail-pane">
-          <div className="detail">
-            {pokemon.name}<br/>
-            Attack: {pokemon.attack}<br/>
-            Defense: {pokemon.defense}<br/>
-            Type: {pokemon.poke_type}<br/>
-            Moves: {pokemon.moves.join(", ")}<br/>
-            <img src={pokemon.image_url} />
-          </div>
-          {pokemon.toys ? toyIndex : ""}
-        </div>
-      );
-    } else {
-      detailView = <div className="pokemon-detail-pane"/>;
-    }
 
     return (
       <div>
-        {detailView}
-        {pokemon.toys ? toyDetail : ""}
+        {pokemon ? this.showDetail() : <div className="pokemon-detail-pane"/>}
+        {pokemon.toys ? this.props.children : ""}
       </div>
     );
   }

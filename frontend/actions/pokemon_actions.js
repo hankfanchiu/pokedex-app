@@ -9,19 +9,12 @@ var PokemonActions = {
     });
   },
 
-  receiveSinglePokemon: function (pokemon) {
+  receivePokemon: function (pokemon) {
     AppDispatcher.dispatch({
-      actionType: PokemonConstants.SINGLE_POKEMON_RECEIVED,
+      actionType: PokemonConstants.POKEMON_RECEIVED,
       pokemon: pokemon
     });
   },
-
-  receiveNewPokemon: function (pokemon) {
-    AppDispatcher.dispatch({
-      actionType: PokemonConstants.POKEMON_CREATED,
-      pokemon: pokemon
-    });
-  }
 };
 
 module.exports = PokemonActions;

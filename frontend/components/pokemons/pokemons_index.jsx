@@ -22,13 +22,10 @@ var PokemonsIndex = React.createClass({
   },
 
   render: function () {
-    var pokemonIds = Object.keys(this.state.pokemons);
-    var pokemons = pokemonIds.map(function (id) {
-      return (
-        <PokemonIndexItem key={id}
-                          pokemon={this.state.pokemons[id]} />
-      );
-    }.bind(this));
+    var pokemons = this.state.pokemons;
+    var pokemonIndexItems = Object.keys(pokemons).map(function (id) {
+      return <PokemonIndexItem key={id} pokemon={pokemons[id]} />;
+    });
 
     return (
       <ul>{pokemons}</ul>

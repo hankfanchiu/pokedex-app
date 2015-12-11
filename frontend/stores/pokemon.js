@@ -3,6 +3,7 @@ var Store = require('flux/utils').Store,
     PokemonConstants = require('../constants/pokemon_constants');
 
 var _pokemons = {};
+
 var PokemonStore = new Store(AppDispatcher);
 
 PokemonStore.__onDispatch = function (payload) {
@@ -10,22 +11,19 @@ PokemonStore.__onDispatch = function (payload) {
     case PokemonConstants.POKEMONS_RECEIVED:
       resetPokemons(payload.pokemons);
       break;
-    case PokemonConstants.SINGLE_POKEMON_RECEIVED:
-      resetSinglePokemon(payload.pokemon);
-      break;
-    case PokemonConstants.POKEMON_CREATED:
-      updatePokemonsList(payload.pokemon);
+    case PokemonConstants.POKEMON_RECEIVED:
+      setPokemon(payload.pokemon);
       break;
   }
 };
 
 PokemonStore.all = function () {
-  var copiedPokemons = {};
-  Object.keys(_pokemons).forEach(function (pokemonKey) {
-    copiedPokemons[pokemonKey] = _pokemons[pokemonKey];
+  var pokemonCopies = {};
+  Object.keys(_pokemons).forEach(function (id) {
+    pokemonCopies[id] = _pokemons[id];
   });
 
-  return copiedPokemons;
+  return pokemonCopies;
 };
 
 PokemonStore.find = function (id) {
@@ -34,20 +32,17 @@ PokemonStore.find = function (id) {
 
 var resetPokemons = function (pokemons) {
   _pokemons = {};
+
   pokemons.forEach(function(pokemon) {
     _pokemons[pokemon.id] = pokemon;
   });
+
   PokemonStore.__emitChange();
 };
 
-var resetSinglePokemon = function (pokemon) {
+var setPokemon = function (pokemon) {
   _pokemons[pokemon.id] = pokemon;
   PokemonStore.__emitChange();
-};
-
-var updatePokemonsList = function (pokemon) {
-  _pokemons[pokemon.id] = pokemon;
-  PokemonStore.__emitChange(pokemon.id);
 };
 
 module.exports = PokemonStore;

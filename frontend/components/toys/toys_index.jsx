@@ -8,9 +8,7 @@ var ToysIndex = React.createClass({
     });
 
     return (
-      <ul>
-        {toys}
-      </ul>
+      <ul>{toys}</ul>
     );
   }
 });

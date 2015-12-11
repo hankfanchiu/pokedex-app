@@ -9,13 +9,13 @@ module.exports = {
 
   fetchPokemon: function (id) {
     $.get("/api/pokemon/" + id, {}, function(pokemon){
-      PokemonActions.receiveSinglePokemon(pokemon);
+      PokemonActions.receivePokemon(pokemon);
     });
   },
 
   createPokemon: function (newPokemon, callback) {
     $.post("/api/pokemon", {pokemon: newPokemon}, function(pokemon) {
-      PokemonActions.receiveNewPokemon(pokemon);
+      PokemonActions.receivePokemon(pokemon);
       callback(pokemon.id);
     });
   }

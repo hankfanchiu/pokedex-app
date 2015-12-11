@@ -4,22 +4,18 @@ var React = require('react'),
 
 var ToyDetail = React.createClass({
   getInitialState: function () {
-    return {
-      toy: this.getStateFromStore()
-    };
+    return { toy: this.getStateFromStore() };
   },
 
   getStateFromStore: function () {
-    var toyId = parseInt(this.props.params.toyId);
     var pokemonId = parseInt(this.props.params.pokemonId);
+    var toyId = parseInt(this.props.params.toyId);
+
     var toys = PokemonStore.find(pokemonId).toys;
-    var toy;
-    toys.forEach(function (possibleToy) {
-      if (possibleToy.id === toyId) {
-        toy = possibleToy;
-      }
+
+    return toys.find(function (possibleToy) {
+      possibleToy.id === toyId;
     });
-    return toy;
   },
 
   _onChange: function () {
@@ -35,10 +31,11 @@ var ToyDetail = React.createClass({
   },
 
   componentWillReceiveProps: function (newProps) {
+    var pokemonId = parseInt(this.props.params.pokemonId);
     var toyId = parseInt(newProps.params.toyId);
 
-    var pokemonId = parseInt(this.props.params.pokemonId);
     var toys = PokemonStore.find(pokemonId).toys;
+
     toys.forEach(function (possibleToy) {
       if (possibleToy.id === toyId) {
         this.setState({ toy: possibleToy });
@@ -46,26 +43,26 @@ var ToyDetail = React.createClass({
     }.bind(this));
   },
 
-  render: function () {
+  showDetail: function () {
     var toy = this.state.toy;
-    var detailView;
-
-    if (toy) {
-      detailView = (
-        <div className="detail">
-          {toy.name}<br/>
-          Happiness: {toy.happiness}<br/>
-          Price: {toy.price}<br/>
-          <img src={toy.image_url} />
-        </div>
-      );
-    } else {
-      detailView = <div className="detail" />;
-    }
 
     return (
+      <div className="detail">
+        {toy.name}<br/>
+
+        Happiness: {toy.happiness}<br/>
+
+        Price: ${toy.price}<br/>
+
+        <img src={toy.image_url} />
+      </div>
+    );
+  },
+
+  render: function () {
+    return (
       <div className="toy-detail-pane">
-        {detailView}
+        {this.state.toy ? this.showDetail() : <div className="detail" />}
       </div>
     );
   }

@@ -4,7 +4,7 @@ var React = require('react'),
     LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var PokemonForm = React.createClass({
-  mixins: [LinkedStateMixin, History],
+  mixins: [History, LinkedStateMixin],
 
   getInitialState: function () {
     return {
@@ -48,17 +48,18 @@ var PokemonForm = React.createClass({
     this.resetState();
   },
 
-  render: function () {
-    var options = window.pokemonTypes.map(function(pokemonType, idx) {
+  pokeTypes: function () {
+    return window.pokemonTypes.map(function(pokemonType, idx) {
       return (
-        <option value={pokemonType} key={idx}>
-          {pokemonType}
-        </option>
+        <option value={pokemonType} key={idx}>{pokemonType}</option>
       );
     });
+  },
 
+  render: function () {
     return (
       <form className="new-pokemon" onSubmit={this.handleSubmit}>
+
         <input type="text"
                valueLink={this.linkState("name")}
                placeholder="Pokemon name"/>
@@ -73,7 +74,7 @@ var PokemonForm = React.createClass({
 
         <select valueLink={this.linkState("poke_type")}>
           <option></option>
-          {options}
+          {this.pokeTypes()}
         </select>
 
         <input type="text"
