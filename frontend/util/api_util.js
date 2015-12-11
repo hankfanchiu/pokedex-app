@@ -11,5 +11,12 @@ module.exports = {
     $.get("/api/pokemon/" + id, {}, function(pokemon){
       PokemonActions.receiveSinglePokemon(pokemon);
     });
+  },
+
+  createPokemon: function (newPokemon, callback) {
+    $.post("/api/pokemon", {pokemon: newPokemon}, function(pokemon) {
+      PokemonActions.receiveNewPokemon(pokemon);
+      callback(pokemon.id);
+    });
   }
 };

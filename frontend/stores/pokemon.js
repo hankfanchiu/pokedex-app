@@ -13,6 +13,9 @@ PokemonStore.__onDispatch = function (payload) {
     case PokemonConstants.SINGLE_POKEMON_RECEIVED:
       resetSinglePokemon(payload.pokemon);
       break;
+    case PokemonConstants.POKEMON_CREATED:
+      updatePokemonsList(payload.pokemon);
+      break;
   }
 };
 
@@ -40,6 +43,11 @@ var resetPokemons = function (pokemons) {
 var resetSinglePokemon = function (pokemon) {
   _pokemons[pokemon.id] = pokemon;
   PokemonStore.__emitChange();
+};
+
+var updatePokemonsList = function (pokemon) {
+  _pokemons[pokemon.id] = pokemon;
+  PokemonStore.__emitChange(pokemon.id);
 };
 
 module.exports = PokemonStore;
